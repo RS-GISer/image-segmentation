@@ -1,10 +1,10 @@
 # dataset settings
 dataset_type = 'ADE20KDataset'
-data_root = 'data/ade/ADEChallengeData2016'
+data_root = r'E:\other_study\git\image-segmentation\road_512_split'
 crop_size = (512, 512)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', reduce_zero_label=True),
+    dict(type='LoadAnnotations', reduce_zero_label=False),
     dict(
         type='RandomResize',
         scale=(2048, 512),
@@ -20,7 +20,7 @@ test_pipeline = [
     dict(type='Resize', scale=(2048, 512), keep_ratio=True),
     # add loading annotation after ``Resize`` because ground truth
     # does not need to do resize data transform
-    dict(type='LoadAnnotations', reduce_zero_label=True),
+    dict(type='LoadAnnotations', reduce_zero_label=False),
     dict(type='PackSegInputs')
 ]
 img_ratios = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75]
@@ -48,7 +48,7 @@ train_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_prefix=dict(
-            img_path='images/training', seg_map_path='annotations/training'),
+            img_path='train/imgs', seg_map_path='train/masks'),
         pipeline=train_pipeline))
 val_dataloader = dict(
     batch_size=1,
@@ -59,8 +59,8 @@ val_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_prefix=dict(
-            img_path='images/validation',
-            seg_map_path='annotations/validation'),
+            img_path='val/imgs',
+            seg_map_path='val/masks'),
         pipeline=test_pipeline))
 test_dataloader = val_dataloader
 
