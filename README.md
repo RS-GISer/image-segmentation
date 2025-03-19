@@ -123,5 +123,5 @@ python demo/image_demo.py demo/demo.png configs/pspnet/pspnet_r50-d8_4xb2-40k_ci
 python tools/train.py mmsegmentation-1.x/configs/upernet/upernet_r50_4xb4-80k_ade20k-512x512.py --work-dir ./results
 # --work-dir 输出文件夹
 ``` 
+
 训练会自动下载对应权重文件，如果已经下载好，可以在mmsegmentation-1.x/configs/_base_/models/upernet_r50.py设置对应预先训练权重
-- 
